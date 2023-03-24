@@ -1,0 +1,120 @@
+@import '../../vendors/variables';
+
+.Quizinfo {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.title {
+    padding-bottom: 16px;
+    text-align: center;
+    font-size: 2em;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+    color: $theme;
+    text-transform: uppercase;
+    transition: 0.15s ease-in-out;
+}
+
+.main-info-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 1.25em;
+    max-width: 1200px;
+
+    .left-container {
+        .links {
+            margin-top: 20px;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+
+            .link {
+                display: flex;
+                align-items: center;
+                padding: 0;
+                border-radius: 20px;
+
+                span {
+                    margin-right: 8px;
+                }
+
+                svg {
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+
+    .right-container {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+        .links {
+            list-style: none;
+            margin-top: 12px;
+
+            .link {
+                margin-top: 8px;
+            }
+        }
+
+        button {
+            padding: 16px 32px;
+            margin: 20px auto;
+            width: 100%;
+            max-width: 240px;
+            border: 0;
+            border-radius: 32px;
+            background: $theme;
+            color: $white;
+            font-size: 1em;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba($theme, 0.5);
+        }
+    }
+
+    .text {
+        margin-top: 20px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .title {
+        font-size: 3em;
+    }
+
+    .main-info-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+
+        .left-container {
+            display: flex;
+            flex-direction: column-reverse;
+
+            .links {
+                gap: 20px;
+                flex-direction: row;
+
+                .link {
+                    padding: 12px;
+                    box-shadow: 0 0 4px rgba($theme, 0.5);
+                }
+            }
+        }
+
+        .right-container {
+            button {
+                margin-left: 0;
+            }
+        }
+    }
+}
