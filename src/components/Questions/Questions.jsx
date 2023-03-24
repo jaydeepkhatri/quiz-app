@@ -3,7 +3,6 @@ import { Complete } from '../index';
 import quiz from '../../data/data';
 import './Questions.scss';
 import { AppContext } from '../../App';
-// import shuffleArray from '../../utils/utils';
 
 function Questions() {
     const { score, setScore } = useContext(AppContext);
