@@ -11,10 +11,38 @@
     }
 }
 
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.1;
+    }
+}
+
 .question-container {
     max-width: 600px;
     margin: 60px auto;
     padding: 20px;
+
+    .timer {
+        position: relative;
+        padding: 12px 20px;
+        padding-left: 24px;
+        display: inline-block;
+
+        &::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: $theme;
+            top: 20px;
+            left: 8px;
+            animation: blink 1s infinite ease-in;
+        }
+    }
 
     .question {
         font-size: 1.2em;

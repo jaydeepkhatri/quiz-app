@@ -8,12 +8,14 @@ function App() {
     const [isQuizStarted, setIsQuizStarted] = useState(false);
     const [isAlertActive, setIsAlertActive] = useState(false);
     const [score, setScore] = useState(0);
+    const [remainingTime, setRemainingTime] = useState(600); // value in seconds
 
     return (
         <AppContext.Provider value={{
             isQuizStarted, setIsQuizStarted,
             isAlertActive, setIsAlertActive,
-            score, setScore
+            score, setScore,
+            remainingTime, setRemainingTime
         }}>
             <div className="App">
                 {

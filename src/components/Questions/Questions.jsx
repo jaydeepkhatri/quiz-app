@@ -3,9 +3,10 @@ import { Complete } from '../index';
 import quiz from '../../data/data';
 import './Questions.scss';
 import { AppContext } from '../../App';
+import formatDuration from '../../utils/utils';
 
 function Questions() {
-    const { score, setScore } = useContext(AppContext);
+    const { score, setScore, remainingTime, setRemainingTime } = useContext(AppContext);
 
     const questions = quiz.questions;
     //let currentQuestionNumber = 0;
@@ -13,7 +14,6 @@ function Questions() {
     const [selectedAnswer, setSelectedAnswer] = useState('');
     const [currentQuestionNumber, setCurrentQuestionNumber] = useState(0);
     const [isTestCompleted, setIsTestCompleted] = useState(false);
-    const [remainingTime, setRemainingTime] = useState(60);
     const totalQuestionNumber = 4; // index starts at 0, so 4 is 5 total questions
 
     // console.log(questions);
@@ -47,10 +47,15 @@ function Questions() {
     // Timer
     useEffect(() => {
         const timer = setInterval(() => {
-            setRemainingTime(prevTime => prevTime - 1);
+            setRemainingTime(prevTime => {
+                if (prevTime === 1) {
+                    clearInterval(timer);
+                    submitQuiz();
+                }
+                return prevTime - 1;
+            });
         }, 1000);
 
-        // Clean up the interval when the component unmounts or when the quiz is completed
         return () => clearInterval(timer);
     }, []);
 
@@ -61,9 +66,9 @@ function Questions() {
                     <>
                         <div className="quiz-header-info">
                             <p className="title">CSS Quiz</p>
-                            <div className="timer">{remainingTime}s</div>
                         </div>
                         <div className="question-container">
+                            <div className="timer">{formatDuration(remainingTime)}</div>
                             {
                                 questions.map((question, index) => {
                                     if (index === currentQuestionNumber) {
