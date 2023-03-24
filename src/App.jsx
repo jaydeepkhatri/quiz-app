@@ -1,14 +1,27 @@
-import React from 'react';
+import React, { useState, createContext } from 'react';
 import './style/main.scss';
-import { Questions } from './components';
+import { Quizinfo, Questions } from './components';
+
+export const AppContext = createContext(null);
 
 function App() {
+    const [isQuizStarted, setIsQuizStarted] = useState(false);
+    const [isAlertActive, setIsAlertActive] = useState(false);
+
     return (
-        <div className="App">
-            {/* <Quizinfo />
-            <Quizalert /> */}
-            <Questions />
-        </div>
+        <AppContext.Provider value={{
+            isQuizStarted, setIsQuizStarted,
+            isAlertActive, setIsAlertActive,
+        }}>
+            <div className="App">
+                {
+                    isQuizStarted ?
+                        <Questions /> :
+                        <Quizinfo /> 
+                        
+                }
+            </div>
+        </AppContext.Provider>
     )
 }
 

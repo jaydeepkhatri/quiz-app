@@ -6,17 +6,17 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-}
 
-.title {
-    padding-bottom: 16px;
-    text-align: center;
-    font-size: 2em;
-    letter-spacing: 1px;
-    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
-    color: $theme;
-    text-transform: uppercase;
-    transition: 0.15s ease-in-out;
+    .title {
+        padding-bottom: 16px;
+        text-align: center;
+        font-size: 2em;
+        letter-spacing: 1px;
+        text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+        color: $theme;
+        text-transform: uppercase;
+        transition: 0.15s ease-in-out;
+    }
 }
 
 .main-info-container {
@@ -88,8 +88,10 @@
 }
 
 @media screen and (min-width: 992px) {
-    .title {
-        font-size: 3em;
+    .Quizinfo {
+        .title {
+            font-size: 3em;
+        }
     }
 
     .main-info-container {

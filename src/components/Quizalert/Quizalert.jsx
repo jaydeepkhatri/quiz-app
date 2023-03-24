@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { CgDanger } from 'react-icons/cg';
 import { AiOutlineClockCircle, AiOutlineQuestionCircle } from 'react-icons/ai';
 import { CiMedal } from 'react-icons/ci';
 import './Quizalert.scss';
+import { AppContext } from '../../App';
 
 function Quizalert() {
+    const { setIsAlertActive, setIsQuizStarted } = useContext(AppContext);
     return (
         <>
             <div className="rules-alert">
@@ -33,9 +35,9 @@ function Quizalert() {
                     </li>
                 </ul>
                 <p className="alert-text"><CgDanger /> This quiz can only be attempted daily once.</p>
-                <button className="start-quiz">Start</button>
+                <button className="start-quiz" onClick={() => setIsQuizStarted(true)}>Start</button>
             </div>
-            <div className="black-cover"></div>
+            <div className="black-cover" onClick={() => setIsAlertActive(false)}></div>
         </>
     )
 }
