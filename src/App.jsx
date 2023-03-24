@@ -7,11 +7,13 @@ export const AppContext = createContext(null);
 function App() {
     const [isQuizStarted, setIsQuizStarted] = useState(false);
     const [isAlertActive, setIsAlertActive] = useState(false);
+    const [score, setScore] = useState(0);
 
     return (
         <AppContext.Provider value={{
             isQuizStarted, setIsQuizStarted,
             isAlertActive, setIsAlertActive,
+            score, setScore
         }}>
             <div className="App">
                 {

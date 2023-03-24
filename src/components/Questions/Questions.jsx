@@ -1,70 +1,100 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { Complete } from '../index';
 import quiz from '../../data/data';
 import './Questions.scss';
+import { AppContext } from '../../App';
+// import shuffleArray from '../../utils/utils';
 
 function Questions() {
-    let questions = quiz.questions;
+    const { score, setScore } = useContext(AppContext);
+
+    const questions = quiz.questions;
     //let currentQuestionNumber = 0;
 
     const [selectedAnswer, setSelectedAnswer] = useState('');
     const [currentQuestionNumber, setCurrentQuestionNumber] = useState(0);
-    const [score, setScore] = useState(0);
     const [isTestCompleted, setIsTestCompleted] = useState(false);
+    const [remainingTime, setRemainingTime] = useState(60);
     const totalQuestionNumber = 4; // index starts at 0, so 4 is 5 total questions
 
     // console.log(questions);
 
+    // Next Question
     const nextQuestion = () => {
+        if (selectedAnswer === '') {
+            //To Make sure the user clicks the option
+            return;
+        }
         if (selectedAnswer === questions[currentQuestionNumber].correctAnswer) {
             setScore(score + 1);
+            console.log('test')
         }
         setCurrentQuestionNumber(currentQuestionNumber + 1);
         setSelectedAnswer('');
+
     }
 
+    // Test Complete
     const submitQuiz = () => {
-        console.log(score);
+        // console.log(score);
+        if (selectedAnswer === questions[currentQuestionNumber].correctAnswer) {
+            setScore(score + 1);
+            console.log('test')
+        }
+        setSelectedAnswer('');
         setIsTestCompleted(true);
     }
 
+    // Timer
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setRemainingTime(prevTime => prevTime - 1);
+        }, 1000);
+
+        // Clean up the interval when the component unmounts or when the quiz is completed
+        return () => clearInterval(timer);
+    }, []);
+
     return (
         <>
-            <div className="quiz-header-info">
-                <p className="title">CSS Quiz</p>
-            </div>
-
             {
                 !isTestCompleted ?
-                    <div className="question-container">
-                        {
-                            questions.map((question, index) => {
-                                if (index === currentQuestionNumber) {
-                                    console.log(question.question);
-                                    return (
-                                        <>
-                                            <p className="question">{index + 1}. {question.question}</p>
-                                            <ul className="options">
-                                                {
-                                                    question.options.map((option, index) => {
-                                                        return selectedAnswer === option ?
-                                                            <li className="option active" onClick={() => setSelectedAnswer(option)} key={index}>{option}</li> :
-                                                            <li className="option" onClick={() => setSelectedAnswer(option)} key={index}>{option}</li>;
+                    <>
+                        <div className="quiz-header-info">
+                            <p className="title">CSS Quiz</p>
+                            <div className="timer">{remainingTime}s</div>
+                        </div>
+                        <div className="question-container">
+                            {
+                                questions.map((question, index) => {
+                                    if (index === currentQuestionNumber) {
+                                        // console.log(question.question);
+                                        return (
+                                            <>
+                                                <p className="question">{index + 1}. {question.question}</p>
+                                                <ul className="options">
+                                                    {
+                                                        question.options.map((option, index) => {
+                                                            return selectedAnswer === option ?
+                                                                <li className={`option ${selectedAnswer === option ? 'active' : ''}`} onClick={() => setSelectedAnswer(option)} key={index}>{option}</li> :
+                                                                <li className="option" onClick={() => setSelectedAnswer(option)} key={index}>{option}</li>;
 
-                                                    })
-                                                }
-                                            </ul>
-                                        </>
-                                    );
-                                }
-                            })
-                        }
-                        {
-                            currentQuestionNumber < totalQuestionNumber ?
-                                <button className="next-button" onClick={() => nextQuestion()}>Next</button> :
-                                <button className="next-button" onClick={() => submitQuiz()}>Submit</button>
-                        }
+                                                        })
+                                                    }
+                                                </ul>
+                                            </>
+                                        );
+                                    }
+                                })
+                            }
+                            {
+                                currentQuestionNumber < totalQuestionNumber ?
+                                    <button className="next-button" onClick={() => nextQuestion()}>Next</button> :
+                                    <button className="next-button" onClick={() => submitQuiz()}>Submit</button>
+                            }
 
-                    </div> : <p>Test is completed: You scored {score}</p>
+                        </div>
+                    </> : <Complete />
             }
         </>
     )
