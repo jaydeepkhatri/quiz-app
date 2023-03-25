@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { AppContext } from '../../App';
 import { Quizalert } from '../index';
 import './Quizinfo.scss';
-import { AiOutlineComment, AiOutlineQuestionCircle, AiOutlineClockCircle, AiOutlineCopy } from 'react-icons/ai';
+import { AiOutlineComment, AiOutlineQuestionCircle, AiOutlineClockCircle } from 'react-icons/ai';
 import { BsBookmark } from 'react-icons/bs';
 import { GiBroadsword } from 'react-icons/gi';
 import { MdContentCopy } from 'react-icons/md';
@@ -44,7 +44,6 @@ function Quizinfo() {
                             </li>
                             <li className="link"><span className="icon"><AiOutlineQuestionCircle /></span> 5 Questions</li>
                             <li className="link"><span className="icon"><AiOutlineClockCircle /></span> 10 Mins</li>
-                            <li className="link"><span className="icon"><AiOutlineCopy /></span> 1 Attempt Daily</li>
                         </ul>
                         <button onClick={() => startQuiz()}>Take Quiz</button>
                     </div>
