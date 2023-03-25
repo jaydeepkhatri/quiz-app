@@ -6,7 +6,7 @@ import { AppContext } from '../../App';
 import formatDuration from '../../utils/utils';
 
 function Questions() {
-    const { score, setScore, remainingTime, setRemainingTime } = useContext(AppContext);
+    const { score, setScore, remainingTime, setRemainingTime, setQuizCompleteTime } = useContext(AppContext);
 
     const questions = quiz.questions;
     //let currentQuestionNumber = 0;
@@ -40,6 +40,7 @@ function Questions() {
             setScore(score + 1);
             console.log('test')
         }
+        setQuizCompleteTime(remainingTime);
         setSelectedAnswer('');
         setIsTestCompleted(true);
     }
@@ -48,10 +49,6 @@ function Questions() {
     useEffect(() => {
         const timer = setInterval(() => {
             setRemainingTime(prevTime => {
-                if (prevTime === 1) {
-                    clearInterval(timer);
-                    submitQuiz();
-                }
                 return prevTime - 1;
             });
         }, 1000);
@@ -74,7 +71,7 @@ function Questions() {
                                     if (index === currentQuestionNumber) {
                                         // console.log(question.question);
                                         return (
-                                            <>
+                                            <React.Fragment key={index}>
                                                 <p className="question">{index + 1}. {question.question}</p>
                                                 <ul className="options">
                                                     {
@@ -86,7 +83,7 @@ function Questions() {
                                                         })
                                                     }
                                                 </ul>
-                                            </>
+                                            </React.Fragment>
                                         );
                                     }
                                 })

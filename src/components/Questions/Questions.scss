@@ -11,18 +11,9 @@
     }
 }
 
-@keyframes blink {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.1;
-    }
-}
-
 .question-container {
     max-width: 600px;
-    margin: 60px auto;
+    margin: 20px auto;
     padding: 20px;
 
     .timer {
@@ -112,5 +103,20 @@
             background: rgba($theme, 0.8);
             box-shadow: 0 0 20px rgba($theme, 0.8);
         }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .question-container {
+        margin: 60px auto;
+    }
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.1;
     }
 }

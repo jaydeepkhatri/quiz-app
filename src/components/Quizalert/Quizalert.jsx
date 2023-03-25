@@ -35,7 +35,9 @@ function Quizalert() {
                     </li>
                 </ul>
                 <p className="alert-text"><CgDanger /> This quiz can only be attempted daily once.</p>
-                <button className="start-quiz" onClick={() => setIsQuizStarted(true)}>Start</button>
+                <div className="text-center">
+                    <button className="start-quiz" onClick={() => setIsQuizStarted(true)}>Start</button>
+                </div>
             </div>
             <div className="black-cover" onClick={() => setIsAlertActive(false)}></div>
         </>

@@ -19,7 +19,7 @@ function Quizinfo() {
     return (
         <>
             <div className="Quizinfo">
-                <h1 className="title">The Daily <span className="green">CSS Quiz</span></h1>
+                <h1 className="title">The Daily CSS Quiz</h1>
                 <div className="main-info-container">
                     <div className="left-container">
                         <ul className="links">
